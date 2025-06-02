@@ -1,0 +1,304 @@
+@use "sass:map";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+$font-stack: 'Inter', sans-serif;
+
+$breakpoints: (
+    "xs": 400px,
+    "sm": 576px,
+    "md": 768px,
+    "lg": 992px,
+    "xl": 1200px,
+    "xxl": 1400px
+);
+
+@mixin responsive($size) {
+    @media (max-width: map.get($breakpoints, $size)) {
+      @content;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-stack;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+h1,p {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.main, .sub-section {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+    backface-visibility: hidden;
+  }
+
+.main {
+    padding: 0 10px;
+    background-image: url('../images/pup-bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; 
+
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 800px;
+
+        .pup-logo {
+            margin-top: 120px;
+            width: 170px;
+            height: 170px;
+            margin-bottom: 20px;
+
+            @include responsive("md") {
+                width: 130px;
+                height: 130px;
+            }
+
+        }
+
+        h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+
+            @include responsive("md") {
+                font-size: 35px;
+            }
+
+
+        }
+
+        .description {
+            //width: 800px;
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 18px;
+
+            @include responsive("md") {
+                font-size: 15px;
+            }
+
+
+        }
+
+    }
+
+    button {
+        padding: 15px 0;
+        padding-right: 50px;
+        padding-left: 60px;
+        background-color: #800000;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 8px;
+        margin-bottom: 90px;
+
+        i {
+            margin-left: 8px;
+        }
+
+
+        &:hover {
+            background-color: #620202;
+        }
+
+    }
+
+    .footer {
+        opacity: 70%;
+        font-size: 14px;
+        padding: 23px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        img {
+            height: 20px;
+            width: 20px;
+            margin: 0 5px;
+        }
+
+    }
+
+}
+
+.sub-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    opacity: 0;
+    z-index: 0;
+    background: #eeeded;
+    padding: 0 10px;
+    position: relative;
+
+    @include responsive("sm") {
+        justify-content: flex-start;
+        padding-top: 150px;
+    }
+
+    .back-btn {
+        position: absolute;
+        top: 48%;
+        left: 2%;
+        padding: 17px 18px;
+        border: none;
+        background-color: #800000;
+        border-radius: 50px;
+        cursor: pointer;
+
+        i {
+            color: white;
+            font-size: 20px;
+
+            @include responsive("sm") {
+                font-size: 18px;
+            }
+
+        }   
+
+        @include responsive("sm") {
+            top: 4%;
+            left: 7%;
+            padding: 15px 16px;
+        }
+
+    }
+
+    .label {
+        color: black;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    .selection-container {
+
+        display: flex;
+        gap: 30px;
+        margin-top: 20px;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        @include responsive("sm") {
+            gap: 10px;
+        }
+
+        .card {
+            overflow-x: hidden;
+            position: relative;
+            width: 210px;
+            height: 270px;
+            border: 2px solid black;
+            border-radius: 15px;
+            background-color: white;
+            cursor: pointer;
+
+            @include responsive("sm") {
+                width: 160px;
+                height: 210px;
+            }
+
+            .card-image {
+                width: 100%;
+                position: absolute;
+                height: 80%;
+                z-index: 1;
+                top: 0;
+
+                img {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+
+            .card-label {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #800000;
+                height: 20%;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                transition: height 0.2s ease;
+                z-index: 2;
+
+                label {
+                    color: white;
+                    font-weight: bold;
+                    font-size: 18px;
+
+                    @include responsive("sm") {
+                        font-size: 15px;
+                    }
+
+                }
+            }
+
+            &:hover {
+                .card-label {
+                    height: 100% !important;
+                    background-color: #c03232 !important;
+                }
+            }
+
+        }
+    }
+
+}
+  
+.main.slide-out {
+    transform: translateX(-100%);
+    opacity: 0;
+    z-index: 0;
+}
+  
+.sub-section.slide-in {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}

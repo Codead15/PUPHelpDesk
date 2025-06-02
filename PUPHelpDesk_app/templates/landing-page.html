@@ -5,14 +5,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{% static 'images/Emman-Aguilar-logo-icon.png' %}" type="image/png">
+    <link rel="icon" href="{% static 'svg/pup-logo.svg' %}" type="image/svg+xml">
     <title>PUP Help Desk</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 </head>
 <body>
 
-    <h1>HI THIS IS THE LANDING PAGE!</h1>
+    <div class="container">
+
+        <section class="main">
+            <div class="content">
+                <img class="pup-logo" src="{% static 'svg/pup-logo.svg' %}" alt="PUP Logo">
+                <h1>PUP Help Desk</h1>
+                <p class="description">a platform designed to assist applicants and students by answering questions and providing guidance on university processes, services, schedules, and campus resources.</p>
+                <button class="shake-button animate__animated"> Get Started <i class="fa-solid fa-arrow-right-long"></i> </button>
+            </div>
+            <div class="footer-container">
+                <p class="footer">Powered by <img src="{% static 'svg/copilot-logo.svg' %}" alt="Copilot Logo"> Copilot Studio.</p>
+            </div>
+        </section>
+    
+        <section class="sub-section">
+    
+             <!-- <button> BACK </button> -->
+            
+            <button class="back-btn"><i class="fa-solid fa-arrow-left"></i></button>
+    
+            <p class="label">Select the category that applies to you:</p>
+
+            <div class="selection-container">
+
+
+                <div class="card applicant">
+                    <div class="card-image">
+                        <img src="{% static 'images/applicant.webp' %}" alt="Applicant Icon">
+                    </div>
+                    <div class="card-label">
+                        <label for="">Applicant</label>
+                    </div>
+
+                </div>
+
+                <div class="card student">
+                    <div class="card-image">
+                        <img src="{% static 'images/student.webp' %}" alt="Student Icon">
+                    </div>
+                    <div class="card-label">
+                        <label for="">Student</label>
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </section>
+    </div>
+    
 
 </body>
+
+<script>
+    setInterval(() => {
+      const btn = document.querySelector('.shake-button');
+      btn.classList.remove('animate__wobble');
+      void btn.offsetWidth; // reflow
+      btn.classList.add('animate__wobble');
+    }, 5000);
+
+    const btn = document.querySelector('.shake-button');
+const backBtn = document.querySelector('.sub-section button');
+const main = document.querySelector('.main');
+const sub = document.querySelector('.sub-section');
+
+// Restore view on page load
+if (localStorage.getItem('currentSection') === 'sub') {
+  main.classList.add('slide-out');
+  sub.classList.add('slide-in');
+}
+
+// Navigate to sub-section
+btn.addEventListener('click', () => {
+  main.classList.add('slide-out');
+  sub.classList.add('slide-in');
+  localStorage.setItem('currentSection', 'sub');
+});
+
+// Navigate back to main section
+if (backBtn) {
+  backBtn.addEventListener('click', () => {
+    main.classList.remove('slide-out');
+    sub.classList.remove('slide-in');
+    localStorage.setItem('currentSection', 'main');
+  });
+}
+
+
+  </script>
 </html>
