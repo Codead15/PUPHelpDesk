@@ -39,25 +39,23 @@
             <div class="selection-container">
 
 
-                <div class="card applicant">
+                <a href="#" class="card applicant">
                     <div class="card-image">
                         <img src="{% static 'images/applicant.webp' %}" alt="Applicant Icon">
                     </div>
                     <div class="card-label">
                         <label for="">Applicant</label>
                     </div>
+                </a>
 
-                </div>
-
-                <div class="card student">
+                <a href="{% url 'student_agent' %}" class="card student">
                     <div class="card-image">
                         <img src="{% static 'images/student.webp' %}" alt="Student Icon">
                     </div>
                     <div class="card-label">
                         <label for="">Student</label>
                     </div>
-
-                </div>
+                </a>
 
             </div>
             

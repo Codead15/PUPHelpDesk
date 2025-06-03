@@ -302,3 +302,19 @@ h1 {
     visibility: visible;
     z-index: 2;
 }
+
+.container {
+    display: flex;
+}
+
+.navigation {
+    background-color: pink;
+    width: 350px;
+    height: 100vh;
+}
+
+.right-section {
+    background-color: red;
+    width: calc(100% - 350px);
+    height: 100vh;
+}
