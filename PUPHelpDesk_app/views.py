@@ -2,9 +2,10 @@ from django.shortcuts import render
 import requests
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
-STUDENT_DIRECT_LINE_SECRET = 'CBH50qf9QrRaAU41qBNIVIxqizRDnmCs8Dfw8leBWqGMxkQFcBuIJQQJ99BFACZoyfiAArohAAABAZBS1F35.BeqxxSC9hYSUF4PNzA6zm3eLIO7gyVcOkgOp5bOdLdUi0BcOlis7JQQJ99BFACZoyfiAArohAAABAZBS0WGE'
-APPLICANT_DIRECT_LINE_SECRET = 'BNDo7jtYnFq3bSBRHTl5UOaQvyHB1zMKadDLUpMdyJEX6rbPJ0ieJQQJ99BEACYeBjFAArohAAABAZBS1UTf.B88ee093QKUfCrFWPYBRvvjFqHnxF2vFWddJ0eMvFUJRhl4mUdk4JQQJ99BEACYeBjFAArohAAABAZBSIPlc'
+STUDENT_DIRECT_LINE_SECRET = settings.STUDENT_DIRECT_LINE_SECRET
+APPLICANT_DIRECT_LINE_SECRET = settings.APPLICANT_DIRECT_LINE_SECRET
 
 def landing_page(request):
     return render(request, 'landing-page.html')
@@ -21,10 +22,8 @@ def get_token(request, user_type):
     url = 'https://directline.botframework.com/v3/directline/tokens/generate'
 
     if user_type == 'student':
-        print('student')
         direct_line_secret = STUDENT_DIRECT_LINE_SECRET
     else:
-        print('applicant')
         direct_line_secret = APPLICANT_DIRECT_LINE_SECRET
     
     headers = {

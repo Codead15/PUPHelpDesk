@@ -1,8 +1,12 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(dotenv_path=BASE_DIR / '.env')
+STUDENT_DIRECT_LINE_SECRET = os.getenv('STUDENT_DIRECT_LINE_SECRET')
+APPLICANT_DIRECT_LINE_SECRET = os.getenv('APPLICANT_DIRECT_LINE_SECRET')
 
 
 # Quick-start development settings - unsuitable for production
