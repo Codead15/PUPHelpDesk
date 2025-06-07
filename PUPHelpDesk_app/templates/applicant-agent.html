@@ -24,20 +24,21 @@
         </div>
 
         <div class="accordion-container">
-          <div class="accordion-header">
-            <div class="nav-icon"><i class="fa-solid fa-book-open"></i></div>
+
+        <div class="accordion-header">
+            <div class="nav-icon"><i class="fa-solid fa-calendar-week"></i></div>
             <div class="text">
-              <span>Academic Support</span>
-              <i class="fas fa-chevron-right accordion-icon"></i>
+                <span>Course Registration & Scheduling</span>
+                <i class="fas fa-chevron-right accordion-icon"></i>
             </div>
-          </div>
-          <div class="accordion-content">
-            <button onclick="sendBotMessage('Available Classrooms & Labs')"><i class="fa-solid fa-paper-plane"></i> Available Classrooms & Labs</button>
-            <button onclick="sendBotMessage('Departmental Examinations')"><i class="fa-solid fa-paper-plane"></i> Departmental Examinations</button>
-            <button onclick="sendBotMessage('Academic Calendar')"><i class="fa-solid fa-paper-plane"></i> Academic Calendar</button>
-            <button onclick="sendBotMessage('Study Tips & Advice')"><i class="fa-solid fa-paper-plane"></i> Study Tips & Advice</button>
-          </div>
-        
+            </div>
+            <div class="accordion-content">
+            <button onclick="sendBotMessage('How To Apply?')"><i class="fa-solid fa-paper-plane"></i> How To Apply?</button>
+            <button onclick="sendBotMessage('Examination Schedule')"><i class="fa-solid fa-paper-plane"></i> Examination Schedule</button>
+            <button onclick="sendBotMessage('Enrollment Schedule')"><i class="fa-solid fa-paper-plane"></i> Enrollment Schedule</button>
+            <button onclick="sendBotMessage('Available Programs & Slots')"><i class="fa-solid fa-paper-plane"></i> Available Programs & Slots</button>
+            </div>
+
           <div class="accordion-header">
             <div class="nav-icon"><i class="fa-solid fa-school"></i></div>
             <div class="text">
@@ -51,32 +52,6 @@
             <button onclick="sendBotMessage('Campus Map & Navigation')"><i class="fa-solid fa-paper-plane"></i> Campus Map & Navigation</button>
           </div>
         
-          <div class="accordion-header">
-            <div class="nav-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-            <div class="text">
-              <span>Student Life & Development</span>
-              <i class="fas fa-chevron-right accordion-icon"></i>
-            </div>
-          </div>
-          <div class="accordion-content">
-            <button onclick="sendBotMessage('Student Organizations')"><i class="fa-solid fa-paper-plane"></i> Student Organizations</button>
-            <button onclick="sendBotMessage('Campus Events & Activities')"><i class="fa-solid fa-paper-plane"></i> Campus Events & Activities</button>
-            <button onclick="sendBotMessage('Career & Internship Services')"><i class="fa-solid fa-paper-plane"></i> Career & Internship Services</button>
-            <button onclick="sendBotMessage('Scholarships & Financial Aid')"><i class="fa-solid fa-paper-plane"></i> Scholarships & Financial Aid</button>
-          </div>
-
-          <div class="accordion-header">
-            <div class="nav-icon"><i class="fa-solid fa-link"></i></div>
-            <div class="text">
-              <span>Useful Links & Digital Services</span>
-              <i class="fas fa-chevron-right accordion-icon"></i>
-            </div>
-          </div>
-          <div class="accordion-content">
-            <button onclick="sendBotMessage('Online Document Request System (ODRS)')"><i class="fa-solid fa-paper-plane"></i> Online Document Request Sy... (ODRS)</button>
-            <button onclick="sendBotMessage('Student Information System (SIS)')"><i class="fa-solid fa-paper-plane"></i> Student Information System (SIS)</button>
-          </div>
-
           <div class="accordion-header">
             <div class="nav-icon"><i class="fa-solid fa-address-book"></i></div>
             <div class="text">
@@ -101,8 +76,8 @@
             <button onclick="sendBotMessage('University History')"><i class="fa-solid fa-paper-plane"></i> University History</button>
           </div>
         </div>
-    
-        <div class="switch-link"><i class="fa-solid fa-repeat"></i><span class="switch-txt">Switch to Applicant Desk</span></div>
+
+        <div class="switch-link"><i class="fa-solid fa-repeat"></i><span class="switch-txt">Switch to Student Desk</span></div>
             <!-- <button onclick="sendBotMessage('Academic Support')">Academic Support</button>
             <button onclick="sendBotMessage('What is the PUP Vision?')">What is the PUP Vision?</button>
             <button onclick="sendBotMessage('What is the PUP Hymn?')">What is the PUP Hymn?</button>
@@ -111,8 +86,7 @@
 
       <div class="right-section">
         <div class="header">
-          <i id="menuBar" class="fa-solid fa-bars menu-big-screen"></i>
-          <i id="menuBarSmallScreen" class="fa-solid fa-bars menu-small-screen"></i>
+          <i id="menuBar" class="fa-solid fa-bars"></i>
           <div class="logo-cont copilot-cont">
             <span>Powered by </span> <img class="copilot-logo" src="{% static 'svg/copilot-logo.svg' %}" alt="Copilot Logo"> <span>Copilot Studio.</span>
           </div>
@@ -124,7 +98,7 @@
   <div class="popover" id="switchPopover">
       <div class="popover-content">
           <div class="popover-message">
-              <p>Are you sure you want to switch to <strong>Applicant Agent</strong>?</p>
+              <p>Are you sure you want to switch to <strong>Student Agent</strong>?</p>
           </div>
           <div class="popover-action">
               <button class="cancel-btn" id="switchPopoverCancelBtn">Cancel</button>
@@ -138,7 +112,7 @@
     let directLine;
 
     async function initBot() {
-      const res = await fetch('/get-token/student/');
+      const res = await fetch('/get-token/applicant/');
       const json = await res.json();
       directLine = window.WebChat.createDirectLine({
         token: json.token
@@ -152,7 +126,7 @@
         styleOptions: {
           botAvatarImage: 'https://raw.githubusercontent.com/aguilaremmanuel/ImageHosting/refs/heads/main/PUPHelpDesk/pup-logo.webp',
           botAvatarInitials: '🤖',
-          userAvatarImage: 'https://raw.githubusercontent.com/aguilaremmanuel/ImageHosting/refs/heads/main/PUPHelpDesk/student.webp',
+          userAvatarImage: 'https://raw.githubusercontent.com/aguilaremmanuel/ImageHosting/refs/heads/main/PUPHelpDesk/applicant.webp',
           userAvatarInitials: '👤',
           showAvatarInGroup: true
         }
@@ -180,7 +154,6 @@
 
   <script>
     const menuBar = document.getElementById('menuBar');
-    const menuBarSmallScreen = document.getElementById('menuBarSmallScreen');
 
     menuBar.addEventListener('click', function () {
 
@@ -198,11 +171,6 @@
       document.querySelector('.switch-txt').classList.toggle('hide');
 
     });
-
-    menuBarSmallScreen.addEventListener('click', function() {
-      document.querySelector('.navigation').classList.toggle('show');
-    });
-
   </script>
 
   <script>
@@ -218,7 +186,6 @@
         }
 
         header.classList.toggle('show');
-
         const content = header.nextElementSibling;
         content.classList.toggle('show');
       });
@@ -235,9 +202,11 @@
     document.getElementById('switchPopoverCancelBtn').addEventListener('click', function() {
       switchPopover.classList.remove('show');
     });
+
     document.getElementById('confirmBtn').addEventListener('click', function() {
-        window.location.href = '/applicant/';
+        window.location.href = '/student/';
     });
+
   </script>
 
 </body>

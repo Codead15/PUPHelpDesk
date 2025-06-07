@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PUP HelpDesk</title>
+  <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #webchat {
+      height: 100%;
+      width: 100%;
+    }
+    .menu {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 10;
+    }
+    .menu button {
+      margin: 5px;
+      padding: 8px 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    <button onclick="sendBotMessage('Academic Support')">Academic Support</button>
+    <button onclick="sendBotMessage('What is the PUP Vision?')">What is the PUP Vision?</button>
+    <button onclick="sendBotMessage('What is the PUP Hymn?')">What is the PUP Hymn?</button>
+    <button onclick="sendBotMessage('What are the PUP Goals?')">What are the PUP Goals?</button>
+  </div>
+
+  <div id="webchat" role="main"></div>
+
+  <script>
+    let directLine;
+
+    async function initBot() {
+      const res = await fetch('/get-token/');
+      const json = await res.json();
+      directLine = window.WebChat.createDirectLine({
+        token: json.token
+      });
+
+      window.WebChat.renderWebChat({
+        directLine: directLine,
+        userID: 'student01',
+        username: 'Student',
+        locale: 'en-US'
+      }, document.getElementById('webchat'));
+    }
+
+    function sendBotMessage(text) {
+      if (directLine) {
+        directLine.postActivity({
+          from: { id: 'student01', name: 'Student' },
+          type: 'message',
+          text
+        }).subscribe(
+          id => console.log("Message sent:", id),
+          error => console.error("Send failed:", error)
+        );
+      }
+    }
+
+    initBot();
+  </script>
+</body>
+</html>
